@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::group(['namespace' => 'Medecin'], function() {
     Route::get('/', 'HomeController@index')->name('medecin.dashboard');
 
@@ -23,7 +25,7 @@ Route::group(['namespace' => 'Medecin'], function() {
     Route::get('email/verify','Auth\VerificationController@show')->name('medecin.verification.notice');
     Route::get('email/verify/{id}','Auth\VerificationController@verify')->name('medecin.verification.verify');
 
-    Route::resource('medecinOrdonances', 'OrdonanceController');
+    Route::resource('medecinOrdonnances', 'OrdonnanceController');
 
     Route::resource('pelerinsMedecin', 'PelerinController');
 

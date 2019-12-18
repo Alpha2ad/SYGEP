@@ -16,7 +16,7 @@ class PelerinController extends Controller
      */
     public function index()
     {
-        $pelerins = Pelerin::where('id', auth('medecin')->user()->agence->id);
+        $pelerins = Pelerin::where('agence_id', auth('medecin')->user()->agence->id);
         return $pelerins;
     }
 

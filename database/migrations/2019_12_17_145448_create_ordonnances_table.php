@@ -22,7 +22,6 @@ class CreateOrdonnancesTable extends Migration
             $table->boolean('status')->nullable()->default(false);
             $table->text('description');
             $table->string('date_operation');
-            $table->string('certificat');
             $table->foreign('pelerin_id')
                 ->references('id')->on('pelerins')
                 ->onDelete('cascade');

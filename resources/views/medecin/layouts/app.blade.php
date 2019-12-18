@@ -327,10 +327,10 @@
                     <span>Tableau de bord</span>
                 </a>
              </li>
-            <li class="{{ Request::is('medecin/ordonances*') ? 'active': '' }}">
-                 <a href="{{ route('medecinOrdonances.index') }}">
+            <li class="{{ Request::is('medecin/medecinOrdonnances*') ? 'active': '' }}">
+                 <a href="{{ route('medecinOrdonnances.index') }}">
                     <i class="material-icons">flag</i>
-                    <span>Ordonances</span>
+                    <span>Certification</span>
                 </a>
             </li>
             {{-- <li class="{{ Request::is('agent/convoits*') ? 'active': '' }}">

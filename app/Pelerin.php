@@ -20,6 +20,11 @@ class Pelerin extends Model
 		return $this->belongsTo('App\Tuteur');
     }
 
+    public function ordonnances()
+    {
+        return $this->hasMany('App\Ordonnance');
+    }
+
     public function agent()
 	{
 		return $this->belongsTo('App\Agent');

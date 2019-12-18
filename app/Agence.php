@@ -74,9 +74,14 @@ class Agence extends Authenticatable
 	{
 		return $this->hasMany('App\Bagage');
     }
-    public function logement()
+    public function logements()
 	{
 		return $this->hasMany('App\Logement');
+    }
+
+    public function ordonnances()
+    {
+        return $this->hasMany('App\Ordonnance');
     }
 
     public function agents()
