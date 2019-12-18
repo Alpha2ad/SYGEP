@@ -326,6 +326,12 @@
                     <span>Tableau de bord</span>
                 </a>
              </li>
+             <li class="{{ Request::is('agent/agentTuteurs*') ? 'active': '' }}">
+                <a href="{{ route('agentTuteurs.index') }}">
+                    <i class="material-icons">person_add</i>
+                    <span>Tuteurs </span>
+                </a>
+            </li>
             <li class="{{ Request::is('agent/agentPelerins*') ? 'active': '' }}">
                  <a href="{{ route('agentPelerins.index') }}">
                     <i class="material-icons">flag</i>

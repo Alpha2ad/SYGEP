@@ -296,10 +296,7 @@ class PelerinController extends Controller
      */
     public function destroy(Pelerin $pelerin)
     {
-        // $agences = Agence::where('id', $request->agence_)->first();
-        // $agenceName = $pelerin->agence->name;
 
-        // $currentDate = date('Y') ;
 
         if(Storage::disk('public')->exists($pelerin->image))
          {

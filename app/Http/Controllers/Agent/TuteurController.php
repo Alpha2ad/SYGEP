@@ -1,18 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Agence;
+namespace App\Http\Controllers\Agent;
 
-use Brian2694\Toastr\Facades\Toastr;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
 use App\Tuteur;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
 
 class TuteurController extends Controller
 {
-    protected $redirectTo = '/agence/login';
+
+    protected $redirectTo = '/agent/login';
 
     /**
      * Create a new controller instance.
@@ -21,7 +19,7 @@ class TuteurController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('agence.auth:agence');
+        $this->middleware('agent.auth:agent');
     }
     /**
      * Display a listing of the resource.
@@ -30,8 +28,8 @@ class TuteurController extends Controller
      */
     public function index()
     {
-        $tuteurs = Tuteur::where('agence_id', auth('agence')->user()->id )->operationDate()->paginate(15);
-        return view('agence.tuteurs.index', compact('tuteurs'));
+        $tuteurs = Tuteur::where('agence_id', auth('agent')->user()->agence->id)->operationDate()->get();
+        return view('agent.tuteurs.index', compact('tuteurs'));
     }
 
     /**
@@ -41,7 +39,7 @@ class TuteurController extends Controller
      */
     public function create()
     {
-        return view('agence.tuteurs.create');
+        return view('agent.tuteurs.create');
     }
 
     /**
@@ -54,22 +52,19 @@ class TuteurController extends Controller
     {
         $this->validate($request, [
             'nom' => 'required',
-            'prenom' => 'required',
             'telephone' => 'required',
             'email' => 'email|max:255',
         ]);
-
         $dateOperation = date('Y');
 
         $tuteur = new Tuteur();
 
         $tuteur->nom = $request->nom;
-        $tuteur->prenom = $request->prenom;
         $tuteur->email = $request->email;
         $tuteur->telephone = $request->telephone;
         $tuteur->description = $request->description;
         $tuteur->date_operation = $dateOperation;
-
+        $tuteur->agence_id = auth('agent')->user()->agence->id;
         $tuteur->save();
         Toastr::success('Tuteur enregistrer avec succè :)', 'Success');
 
@@ -82,9 +77,10 @@ class TuteurController extends Controller
      * @param  \App\Tuteur  $tuteur
      * @return \Illuminate\Http\Response
      */
-    public function show(Tuteur $tuteur)
+    public function show($id)
     {
-        return view('agence.tuteurs.show', compact('tuteur'));
+     $tuteur = Tuteur::findOrfail($id);
+        return view('agent.tuteurs.show', compact('tuteur'));
     }
 
     /**
@@ -93,9 +89,10 @@ class TuteurController extends Controller
      * @param  \App\Tuteur  $tuteur
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tuteur $tuteur)
+    public function edit($id)
     {
-        return view('agence.tuteurs.edit', compact('tuteur'));
+        $tuteur = Tuteur::findOrfail($id);
+        return view('agent.tuteurs.edit', compact('tuteur'));
     }
 
     /**
@@ -105,27 +102,27 @@ class TuteurController extends Controller
      * @param  \App\Tuteur  $tuteur
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tuteur $tuteur)
+    public function update(Request $request, $id)
     {
+        $tuteur = Tuteur::findOrfail($id);
+        // return $request;
         $this->validate($request, [
             'nom' => 'required',
-            // 'prenom' => 'required',
             'telephone' => 'required',
             'email' => 'email|max:255',
         ]);
-
         // $dateOperation = date('Y');
 
-        // $tuteur = new Tuteur();
 
         $tuteur->nom = $request->nom;
-        $tuteur->prenom = $request->prenom;
+        // $tuteur->prenom = $request->prenom;
         $tuteur->email = $request->email;
         $tuteur->telephone = $request->telephone;
         $tuteur->description = $request->description;
-        $tuteur->agence_id = auth('agence')->user()->id;
+        $tuteur->agence_id = auth('agent')->user()->agence->id;
 
         $tuteur->save();
+
         Toastr::success('Tuteur Modifier avec succè :)', 'Success');
 
         return redirect()->back();
@@ -137,8 +134,9 @@ class TuteurController extends Controller
      * @param  \App\Tuteur  $tuteur
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tuteur $tuteur)
+    public function destroy($id)
     {
+        $tuteur = Tuteur::findOrfail($id);
         $tuteur->delete();
         Toastr::success('Tuteur supprimer avec succè :)', 'Success');
         return redirect()->back();

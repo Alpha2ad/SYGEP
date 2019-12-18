@@ -143,6 +143,7 @@ class PelerinController extends Controller
         //     $pelerin->agence_id = $request->agence;
         // }
         if (isset($request->agent)) {
+
             $pelerin->agent_id = $request->agent;
         }
         if (isset($request->convoit)) {

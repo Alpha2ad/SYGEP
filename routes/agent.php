@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::group(['namespace' => 'Agent'], function() {
     Route::get('/', 'HomeController@index')->name('agent.dashboard');
 
@@ -24,6 +26,8 @@ Route::group(['namespace' => 'Agent'], function() {
     Route::get('email/verify/{id}','Auth\VerificationController@verify')->name('agent.verification.verify');
 
     Route::resource('agentPelerins', 'PelerinController');
+
+    Route::resource('agentTuteurs', 'TuteurController');
 
     Route::resource('agentProfile', 'AgentprofileController');
     Route::get('/{any}', function () {

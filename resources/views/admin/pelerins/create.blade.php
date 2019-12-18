@@ -47,7 +47,7 @@
                     <i class="material-icons">person</i>
                   </span>
                   <div class="form-line">
-                    <input type="text" class="form-control date" placeholder="Nom complet de personne/Entreprise" name="nom" required>
+                    <input type="text" class="form-control date" placeholder="Nom complet de la personne physique/morale" name="nom" required>
                   </div>
                 </div>
                 <div class="input-group">

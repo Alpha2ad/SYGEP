@@ -1,14 +1,14 @@
 @extends('agent.layouts.app')
 
-@section('title', 'Lite des pelerins')
+
+
+@section('title', 'Modification | ')
 
 @push('css')
 
-<link href="{{ asset('backend/assets/plugins/bootstrap-material-datetimepicker/font/Material-Design-Icons.svg') }}" rel="stylesheet" type="text/css">
-<!-- JQuery DataTable Css -->
-
-<link href="{{ asset('backend/assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet">
-<link href="{{ asset('backend/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('backend/assets/plugins/multi-select/css/multi-select.css') }}">
+<link rel="stylesheet" href="{{ asset('backend/assets/plugins/bootstrap-select/css/bootstrap-select.css') }}">
+<link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}">
 
 @endpush
 
@@ -16,183 +16,226 @@
 
 <section class="content">
   <div class="container-fluid">
+    <div class="card " >
+      <div class="header bg-teal">
+        <strong class="">Page de Modification de pelerin(es) </strong>
+        <ul class="header-dropdown m-r--5">
+          <li class="dropdown">
+            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class="material-icons">more_vert</i>
+            </a>
+            <ul class="dropdown-menu pull-right">
+              {{-- <li class=" bg-teal"><a href="javascript:void(0);" class=" bg-teal" data-toggle="modal" data-target="#formPelerin"><i class=" material-icons">add</i> de Tuteur</a></li> --}}
+              <li><a href="javascript:void(0);">Another action</a></li>
+              <li><a href="javascript:void(0);">Something else here</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <div class="">
-        {{-- <div class="header bg-teal">
-          <h2>
-            Modification des informations du pelerin
+    <form method="POST" action="{{ route('agentPelerins.update', $pelerin->id) }}" enctype="multipart/form-data">
+      @csrf
+      @method('PUT')
+      <div class="row clearfix">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+          <div class="card">
+            <div class="header bg-teal">
+              <h2>
+                Les informations du pelerin
+              </h2>
+            </div>
+            <div class="body">
+              <div class="col-lg-6 col-sm-12">
+                <div class="input-group form-float">
+                  <span class="input-group-addon">
+                    <i class="material-icons">person</i>
+                  </span>
+                  <div class="form-line">
+                    <input type="text" class="form-control date" placeholder="Nom" name="nom" value="{{$pelerin->nom}} " required>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="material-icons">person</i>
+                  </span>
+                  <div class="form-line">
+                    <input type="text" class="form-control date" placeholder="Prenom(s)" name="prenom" value="{{$pelerin->prenom}} " required>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="material-icons">phone_iphone</i>
+                  </span>
+                  <div class="form-line">
+                    <input type="text" class="form-control mobile-phone-number" placeholder="Telephone" value="{{$pelerin->telephone}} " required name="telephone">
+                  </div>
+                </div>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="material-icons">credit_card</i>
+                  </span>
+                  <div class="form-line">
+                    <input type="text" class="form-control credit-card" placeholder="N° Passeport" value="{{$pelerin->num_passeport}} " name="num_passeport" required>
+                  </div>
+                </div>
 
-          </h2>
-          <ul class="header-dropdown m-r--5">
-            <li class="dropdown">
-              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <i class="material-icons">more_vert</i>
-              </a>
-              <ul class="dropdown-menu pull-right">
-                <li><a href="javascript:void(0);">Action</a></li>
-                <li><a href="javascript:void(0);">Another action</a></li>
-                <li><a href="javascript:void(0);">Something else here</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div> --}}
-        <div class="body">
-          <form method="POST" action="{{ route('agentPelerins.update', $pelerin->id) }} " enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <div class="row clearfix">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="card">
-                  <div class="header bg-teal">
-                    <h2>
-                     Les informations du pelerin
-                   </h2>
-                 </div>
-                 <div class="body">
-                  <div class=" row">
-                    <div class="col-lg-6 col-sm-12">
-                      <div class="input-group form-float">
-                        <span class="input-group-addon">
-                          <i class="material-icons">person</i>
-                        </span>
-                        <div class="form-line">
-                          <input type="text" class="form-control date" value="{{ $pelerin->nom}} " name="nom" required>
-                        </div>
-                      </div>
-                      <div class="input-group">
-                        <span class="input-group-addon">
-                          <i class="material-icons">person</i>
-                        </span>
-                        <div class="form-line">
-                          <input type="text" class="form-control date" value="{{ $pelerin->prenom}} "  name="prenom" required>
-                        </div>
-                      </div>
-                      <div class="input-group">
-                        <span class="input-group-addon">
-                          <i class="material-icons">phone_iphone</i>
-                        </span>
-                        <div class="form-line">
-                          <input type="text" class="form-control mobile-phone-number" value="{{ $pelerin->telephone}} " required name="telephone">
-                        </div>
-                      </div>
-                      <div class="input-group">
-                        <span class="input-group-addon">
-                          <i class="material-icons">credit_card</i>
-                        </span>
-                        <div class="form-line">
-                          <input type="text" class="form-control credit-card" value="{{ $pelerin->num_passeport}} " name="num_passeport" required>
-                        </div>
-                      </div>
-                      {{-- <label for="agent" class="form-label" >agents</label>
-                      <select class="form-control show-tick" id="agent" name="agent "  data-live-search="true" >
-                            @foreach($agents as $key=>$agent)
-                            <option value="{{ $agent->id }}">{{ $agent->name }}</option>
-                            @endforeach
-                     </select> --}}
+                {{-- <label for="agence" class="form-label" >TYPE</label> --}}
+              </div>
+              <div class="col-lg-6 col-sm-12">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="material-icons">email</i>
+                  </span>
+                  <div class="form-line">
+                    <input type="text" class="form-control email" placeholder="Ex: example@example.com" value="{{$pelerin->email}} " name="email" required>
+                  </div>
+                </div>
 
-                   </div>
-
-                   <div class="col-lg-6 col-sm-12">
-                    <div class="input-group">
-                      <span class="input-group-addon">
-                        <i class="material-icons">email</i>
-                      </span>
-                      <div class="form-line">
-                        <input type="text" class="form-control email" value="{{ $pelerin->email}} " name="email" required>
-                      </div>
-                    </div>
-                    <div class="input-group">
-                      <span class="input-group-addon">
-                        <i class="material-icons">date_range</i>
-                      </span>
-                      <div class="form-line">
-                        <input type="text" class="form-control date" value="{{ $pelerin->date_naissance}} " name="date_naissance" required>
-                      </div>
-                    </div>
-                    <div class="input-group">
-                      <span class="input-group-addon">
-                        <i class="material-icons">date_range</i>
-                      </span>
-                      <div class="form-line">
-                        <input type="text" class="form-control date" value="{{ $pelerin->date_delivrance}} " required name="date_delivrance">
-                      </div>
-                    </div>
-                    <div class="input-group">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="material-icons">date_range</i>
+                  </span>
+                  <div class="form-line">
+                      <small>Date naissance </small>
+                    <input type="text" class="form-control date" placeholder="date de naissance" value="{{$pelerin->date_naissance}} " name="date_naissance" required>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="material-icons">date_range</i>
+                  </span>
+                  <div class="form-line">
+                    <small>Date de delivrance passeport </small>
+                    <input type="text" class="form-control date" placeholder="date de delivrance passeport" value="{{$pelerin->date_delivrance}} " required name="date_delivrance">
+                  </div>
+                </div>
+                <div class="input-group">
                       <span class="input-group-addon">
                         <i class="material-icons">date_range</i>
                       </span>
                       <div class="form-line">
+                          <small>Date d'expiration passeport </small>
                         <input type="text" class="form-control date" value="{{ $pelerin->date_expiration}} " required name="date_expiration">
                       </div>
                     </div>
                   </div>
-                  <label for="image">Image du pelerin(e)</label>
-                  <div class="form-group">
-                    <input type="file" id="image" placeholder="Image de l'aricle" name="image" value="{{$pelerin->image}} " >
-                  </div>
-                  <a href=""  class="btn btn-warning m-t-15 waves-effect"><i class="material-icons">reply</i>RETOUR</a>
-                 <button type="submit" class="btn btn-primary m-t-15 waves-effect"><i class="material-icons">update</i> MODIFIER</button>
-                </div>
+              <div class="form-group">
+                <input type="file" id="image" placeholder="Image du pelerin" name="image">
               </div>
+              {{-- <label for="publication">Publier</label> --}}
+
             </div>
           </div>
-          {{-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-            <div class="card">
-              <div class="header bg-indigo">
-                <h2>
-                  agent, Convoit et Catégorie
-                </h2>
-              </div>
-              <div class="body">
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+          <div class="card">
+            <div class="header bg-teal">
+              <h2>
+                Informations suplementaire
+              </h2>
+            </div>
+            <div class="body">
+              <label for="agence" class="form-label" >Selectionnez la categorie </label>
+              <select class="form-control show-tick" id="type" name="type" required  data-live-search="true" >
+                <option disabled selected>Aucune categorie selectionner</option>
+                <option value="Ordinaire">Ordinaire </option>
+                <option value="VIP">VIP</option>
+              </select>
+              <br>
+              {{-- <label for="agent" class="form-label"> Selectionnez l'agent</label>
+              <select class="form-control show-tick"  data-live-search="true" id="agent" name="agent">
+                <option disabled selected>Aucun element selectionner</option>
+                @foreach($pelerin->agence->agents as $key=>$agent)
+                <option value="{{ $agent->id }}" {{$pelerin->agent->id = $agent ? 'selected': ''}}>{{ $agent->name }}</option>
+                @endforeach
+              </select>
+              <br> --}}
 
-                <label for="agent" class="form-label" >agents</label>
-                <select class="form-control show-tick" id="agent" name="agent "  data-live-search="true" >
-                 @foreach($agents as $key=>$agent)
-                 <option value="{{ $agent->id }}">{{ $agent->name }}</option>
-                 @endforeach
-               </select>
-               <br>
-               <label for="Tags" class="form-label"> Convoits</label>
-                  <select class="form-control show-tick"  data-live-search="true" id="convoit" name="convoit ">
-                   @foreach($convoits as $key=>$convoit)
-                   <option value="{{ $convoit->id }}">{{ $convoit->type_avion }}</option>
-                   @endforeach
-                 </select>
-                 <br>
-                 <label for="Tags" class="form-label"> categorie</label>
-                 <select class="form-control show-tick"  data-live-search="true" id="convoit" name="categorie ">
-                    @foreach($categories as $key=>$category)
-                   <option value="{{ $category->id }}">{{ $category->nom }}</option>
-                   @endforeach
-                 </select>
-                 <br>
-                 <a href=""  class="btn btn-warning m-t-15 waves-effect"><i class="material-icons">reply</i>Retour</a>
-                 <button type="submit" class="btn btn-primary m-t-15 waves-effect">Enregistrer</button>
-               </div>
-             </div>
-           </div>
-         </div> --}}
-         <!-- #END# Vertical Layout -->
-       </div>
-       <div role="tabpanel" class="tab-pane fade" id="settings">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis, ipsam cum mollitia eaque soluta vero repudiandae ducimus aliquid reprehenderit quisquam odit itaque aut maxime expedita illum rem optio numquam voluptates!
+              <br>
+              <label for="tuteurs" class="form-label"> Selectionnez le Tuteur</label>
+              <select class="form-control show-tick"  data-live-search="true" id="tuteurs" name="tuteur">
+                <option disabled selected>Aucun element selectionner</option>
+                @foreach($pelerin->agence->tuteurs as $key=>$tuteur)
+                <option value="{{ $tuteur->id }} " {{$pelerin->tuteur->id = $tuteur ? 'selected': ''}}>
+                  <small>{{ $tuteur->nom }} {{ $tuteur->prenom }} ({{ $tuteur->telephone }}) </small>
+                </option>
+                @endforeach
+              </select>
+              <br>
+
+              <br>
+              <a href="{{ route('pelerins.index') }}"  class="btn btn-warning m-t-15 waves-effect"><i class="material-icons">reply</i>Retour</a>
+              <button type="submit" class="btn bg-teal m-t-15 waves-effect"><i class=" material-icons">save</i> Enregistrer</button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+      <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="header bg-teal">
+              <h2>
+                Les informations ou une description si necessaire
+              </h2>
+              <ul class="header-dropdown m-r--5">
+                <li class="dropdown">
+                  <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                  </a>
+                  <ul class="dropdown-menu pull-right">
+                    <li><a href="javascript:void(0);" data-toggle="modal" data-target="#formPelerin">Action</a></li>
+                    <li><a href="javascript:void(0);">Another action</a></li>
+                    <li><a href="javascript:void(0);">Something else here</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="description">
+              <textarea id="tinymce" name="description">
+                {{$pelerin->description}}
+              </textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- #END# Vertical Layout -->
+
   </div>
-
-
 </section>
+
 
 @endsection
 
 @push('scripts')
 
-<script src="{{ asset('backend/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
-{{-- <script src="{{ asset('backend/assets/plugins/jquery-validation/jquery.validate.js') }}"></script>
-<script src="{{ asset('backend/assets/plugins/jquery-steps/jquery.steps.js') }}"></script> --}}
-<script src="{{ asset('backend/assets/js/pages/ui/dialogs.js') }}"></script>
+<script src="{{ asset('backend/assets/plugins/multi-select/js/jquery.multi-select.js') }}"></script>
+<script src="{{ asset('backend/assets/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
+<script src="{{ asset('backend/assets/plugins/tinymce/tinymce.js') }}"></script>
+<script src="{{ asset('backend/assets/plugins/ckeditor/ckeditor.js') }}"></script>
 
+<script>
+  $(function () {
 
+//TinyMCE
+tinymce.init({
+  selector: "textarea#tinymce",
+  theme: "modern",
+  height: 300,
+  plugins: [
+  'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+  'searchreplace wordcount visualblocks visualchars code fullscreen',
+  'insertdatetime media nonbreaking save table contextmenu directionality',
+  'emoticons template paste textcolor colorpicker textpattern imagetools'
+  ],
+  toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+  toolbar2: 'print preview media | forecolor backcolor emoticons',
+  image_advtab: true
+});
+tinymce.suffix = ".min";
+tinyMCE.baseURL = '{{ asset('backend/assets/plugins/tinymce') }}';
+});
+</script>
 
 @endpush

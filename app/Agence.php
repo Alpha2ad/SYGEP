@@ -61,6 +61,11 @@ class Agence extends Authenticatable
         $this->notify(new AgenceVerifyEmail);
     }
 
+    public function tuteurs()
+    {
+        return $this->hasMany('App\Tuteur');
+    }
+
     public function pelerins()
 	{
 		return $this->hasMany('App\pelerin');
