@@ -27,6 +27,6 @@ Route::group(['namespace' => 'Medecin'], function() {
 
     Route::resource('medecinOrdonnances', 'OrdonnanceController');
 
-    Route::resource('pelerinsMedecin', 'PelerinController');
+    Route::resource('medecinPelerins', 'PelerinController');
 
 });

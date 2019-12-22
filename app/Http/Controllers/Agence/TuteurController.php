@@ -30,8 +30,15 @@ class TuteurController extends Controller
      */
     public function index()
     {
-        $tuteurs = Tuteur::where('agence_id', auth('agence')->user()->id )->operationDate()->paginate(15);
-        return view('agence.tuteurs.index', compact('tuteurs'));
+        if (auth('agence')->user()->status == 1) {
+
+
+            $tuteurs = Tuteur::where('agence_id', auth('agence')->user()->id)->operationDate()->paginate(15);
+            return view('agence.tuteurs.index', compact('tuteurs'));
+        } else {
+            return redirect()->route('agence.login');
+        }
+
     }
 
     /**

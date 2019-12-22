@@ -327,6 +327,12 @@
                     <span>Tableau de bord</span>
                 </a>
              </li>
+             <li class="{{ Request::is('medecin/medecinPelerins*') ? 'active': '' }}">
+                 <a href="{{ route('medecinPelerins.index') }}">
+                    <i class="material-icons">flag</i>
+                    <span>Pelerin</span>
+                </a>
+            </li>
             <li class="{{ Request::is('medecin/medecinOrdonnances*') ? 'active': '' }}">
                  <a href="{{ route('medecinOrdonnances.index') }}">
                     <i class="material-icons">flag</i>

@@ -1,5 +1,4 @@
-@extends('agence.layouts.app')
-
+@extends('medecin.layouts.app')
 
 @section('title', 'Liste des pelerins | ')
 
@@ -21,7 +20,7 @@
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
     <div class="button-demo">
-            <a href="{{ route('pelerins.create') }}" type="button" class="btn bg-teal waves-effect"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class=" material-icons">add</i> Ajouter</font></font></a>
+            <a href="{{ route('medecinPelerins.create') }}" type="button" class="btn bg-teal waves-effect"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class=" material-icons">add</i> Ajouter</font></font></a>
       {{-- <button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#formPelerin"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class=" material-icons large bold">add</i> Ajouter</font></font></button> --}}
       <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#exportationData"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class=" material-icons large bold">content_paste</i> EXPORTER</font></font></button>
 
@@ -99,12 +98,12 @@
 
                            <tr>
                             <td>{{ $key +1 }}</td>
-                            <td>{{ $pelerin->nom }}</td>
-                            <td>{{ $pelerin->prenom }}</td>
-                            <td>{{ $pelerin->num_passeport }}</td>
-                            <td>{{ $pelerin->id_pelerin }}</td>
-                            <td>{{ $pelerin->telephone }}</td>
-                            <td>{{ $pelerin->email }}</td>
+                            <td>{{ $pelerin-> nom }}</td>
+                            <td>{{ $pelerin-> prenom }}</td>
+                            <td>{{ $pelerin-> num_passeport }}</td>
+                            <td>{{ $pelerin-> id_pelerin }}</td>
+                            <td>{{ $pelerin-> telephone }}</td>
+                            <td>{{ $pelerin-> email }}</td>
                             <td>
                              @if($pelerin->status == true)
 
@@ -116,8 +115,7 @@
 
                              @endif
                            </td>
-
-                           <td>{{ $pelerin->date_naissance  }}</td>
+                           <td>{{ $pelerin-> date_naissance }}</td>
 
                          </tr>
 
@@ -162,7 +160,7 @@
         </div>
         <div class="body">
                 <div class="table-responsive">
-                  <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0_teal" role="grid" aria-describedby="DataTables_Table_0_teal">
+                  <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_teal">
                     <thead>
                       <tr>
                         <tr>
@@ -199,12 +197,12 @@
 
                      <tr>
                       <td>{{ $key +1 }}</td>
-                      <td>{{ $pelerin-> nom }}</td>
-                      <td>{{ $pelerin-> prenom }}</td>
-                      <td>{{ $pelerin-> num_passeport }}</td>
-                      <td>{{ $pelerin-> id_pelerin }}</td>
-                      <td>{{ $pelerin-> telephone }}</td>
-                      <td>{{ $pelerin-> email }}</td>
+                      <td>{{ $pelerin->nom }}</td>
+                      <td>{{ $pelerin->prenom }}</td>
+                      <td>{{ $pelerin->num_passeport }}</td>
+                      <td>{{ $pelerin->id_pelerin }}</td>
+                      <td>{{ $pelerin->telephone }}</td>
+                      <td>{{ $pelerin->email }}</td>
                       <td>
                        @if($pelerin->status == true)
 
@@ -216,19 +214,19 @@
 
                        @endif
                      </td>
-                     <td>{{ $pelerin-> date_naissance }}</td>
+                     <td>{{ $pelerin->date_naissance }}</td>
                      <td class=""> <ul class="header-dropdown m-r--5 ">
                        <li class="dropdown">
                          <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                            <i class="material-icons">more_vert</i>
                          </a>
                          <ul class="dropdown-menu pull-right ">
-                           <li class="white"><a href="{{ route('pelerins.show', $pelerin->id) }}" class="btn waves-effect white"><i class="material-icons">visibility</i>Detail</a></li>
-                           <li><a href="{{ route('pelerins.edit', $pelerin->id) }}" class="btn waves-effect white-text"><i class="material-icons">edit</i>Modification</a></li>
+                           <li class="white"><a href="{{ route('medecinPelerins.show', $pelerin->id) }}" class="btn waves-effect white"><i class="material-icons">visibility</i>Detail</a></li>
+                           <li><a href="{{ route('medecinPelerins.edit', $pelerin->id) }}" class="btn waves-effect white-text"><i class="material-icons">edit</i>Modification</a></li>
                            <li>
                            </li>
                            <li>
-                            <form method="post" id="delete-form-{{ $pelerin->id }} " action="{{ route('pelerins.destroy', $pelerin->id) }}" style="display: none;">
+                            <form method="post" id="delete-form-{{ $pelerin->id }} " action="{{ route('medecinPelerins.destroy', $pelerin->id) }}" style="display: none;">
                              @csrf
                              @method('DELETE')
                            </form>
@@ -251,9 +249,7 @@
                @endforeach
 
              </tbody>
-
            </table>
-           {{-- {{$pelerins->links}} --}}
          </div>
        </div>
 
